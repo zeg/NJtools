@@ -1,5 +1,6 @@
 # NJtools
 nga javascript tool lib
+
 NGA论坛使用的超轻量JS工具组合
 
 # 使用
@@ -8,12 +9,13 @@ NGA论坛使用的超轻量JS工具组合
 # dom元素操作
 NJtools.part2.dom.js
 
-为完全使用js构建页面而设计 简化写法 简洁的创建dom元素
+为完全使用js构建页面而设计 书写简单
 
 # Ajax
 NJtools.part6.http.js
 
 使用JSONP传输数据 方便跨域
+
 请求队列功能 便于设计为先请求静态缓存 再请求动态程序的模式
 
 # 例子
