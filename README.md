@@ -9,7 +9,7 @@ NGA论坛使用的超轻量JS工具组合
 # dom元素操作
 NJtools.part2.dom.js
 
-为完全使用js构建页面而设计 书写简单
+为完全使用js构建页面设计 书写简单
 
 # Ajax
 NJtools.part6.http.js
@@ -48,4 +48,6 @@ NJtools.part6.http.js
 		)
 	document.body.appendChild(y)
 	}//f
+	test()
+	
 
