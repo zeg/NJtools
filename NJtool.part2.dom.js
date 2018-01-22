@@ -108,8 +108,9 @@ call:function(){
  *@param name , value 
  *@param event , callback 
  *@param {name: value, name: value ...}
+ *自定义属性名用 _ 开头
  *设定className时如value为null则清空 否则为添加到原className结尾
- *设定style时value为{cssName: value, cssName: value ...}
+ *设定style时value为'cssName:value;cssName:value;...'或{cssName: value, cssName: value ...}
  */
 attr:function(k,v){
 	if(typeof v == 'function' && k.substr(0,2)=='on')
@@ -223,17 +224,12 @@ var x = $('/span')
 var x = $('xxoo')
 
 //例子
-$('/span','className','xxoo','style','color:red;fontWeight:bold','onclick',function(){alert(123)},
-	$('/span','style','color:blue')
-	) //简单的写法 一次生成
+$('/span','id','xxoo','style','width:100%',$('/span'),'className','xxoo')//使用主函数一次生成
 
-$('xxoo')._.cls('xxxxoooo')._.attr('title','abcd')._.add($('/span'),$('/div'),'test text')//链式调用 各个方法的使用参看domExtPrototype
+$('xxoo').$0('style',{width:'100%'},$('/span'),'onclick',function(e){alert(123)}).$0('className','xxoo')//使用$0方法 $0参看domExtPrototype.call
 
-$('xxoo').$0('className','xxoo','style',{width:'100%'},$('/span'),'onclick',function(e){alert(123)})//综合调用 $0的参数参看domExtPrototype.call
-		
-$('xxoo').$0('className','xxoo').$0('style',{width:'100%'},$('/span'),'onclick',function(e){alert(123)})//链式综合调用
+$('/span')._.cls('xxxxoooo')._.attr('title','abcd')._.add($('/span'),$('/div'),'test text')//使用不同的方法链式调用 使用参看domExtPrototype
 
-
- */
+*/
 
 

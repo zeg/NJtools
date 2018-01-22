@@ -15,7 +15,10 @@ var FORM,SCRIPT,TARGET,ARGS,RUN
 * @param a 输入参数是一个object 结构如下
 * a._id 不要设这个
 * a._noLock 不要设这个
-* a.u 请求地址 为string时使用get方法;  为{u:url,a:{k1:v1,k2:v2....}}时使用post方法;  需要使用“多组地址”时[请求地址0,请求地址1 ...]
+* a.u 请求地址 
+*		为string时使用get方法 使用插入script标签的方式获取数据 可以跨域
+*		为{u:url,a:{k1:v1,k2:v2....}}时使用post方法 使用iframe或XHR方式获取数据 跨域需XHR并在服务器输出特定header
+*		需要使用“多组地址”时[请求地址0,请求地址1 ...]
 * a.c 返回信息的字符集 不设默认为空（和页面相同编码
 * a.b 提交按钮/或链接 (可以忽略
 * a.f 成功时callback函数 如此函数返回true意为成功 返回false意为失败 失败并且有“多组地址”时则继续尝试下一个
@@ -223,40 +226,5 @@ $.doPost = doPost
 /**
 //用例:
 
-//浏览器端
-function test(){
-var x
-document.body.appendChild($('/div',
-	'style','padding:0.5em;border:1px solid #000',
-	'输入内容并提交到服务器',
-	$('/br'),
-	x = $('/input','size',20),
-	$('/br'),
-	$('/button','innerHTML','提交','type','button','onclick',function(){
-			$.doRequest({
-				u:{
-					u:'http://xxoo.com/test.php',
-					a:{'val':x.value}
-					},
-				b:this,
-				n:'data',//服务器返回的数据变量名
-				f:function(d){
-					console.log('提交成功 服务器返回:')
-					console.log(d)
-					},
-				ff:function(){
-					console.log('请求失败')
-					}
-				})
-			}
-		)
-	))
-}//f
-
-//服务端
-<?php
-echo "var data={'msg':'server receive '.strlen($_REQUEST['val']).'byte'}";
-
-
-//更复杂的使用参照doRequest的注释
+参照doRequest的注释
  */
