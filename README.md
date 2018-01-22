@@ -11,7 +11,7 @@ NJtools.part2.dom.js
 
 为完全使用js构建页面设计 书写简单
 
-##例子1
+## 例子1
 	//简单的写法 使用主函数一次生成 参数参看domExtPrototype.call
 	document.body.appendChild(
 		$('/div',//斜线加nodeName生成
@@ -28,7 +28,7 @@ NJtools.part2.dom.js
 			)
 		)
 
-##例子2
+## 例子2
 	$('/span')._.cls('xxxxoooo')._.attr('title','abcd')._.add($('/span'),$('/div'),'test text')//使用不同的方法链式调用 使用参看domExtPrototype
 
 	var x = $('xxoo')//不加斜线用来获取node 相当于document.getElementById
