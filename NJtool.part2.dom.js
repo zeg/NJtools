@@ -26,16 +26,47 @@ cls:function(cn){
  *@param (obj)o/{name:value,name:value,name:value...}
  */
 css:function(){
-	if(arguments.length==1){
-		var o = arguments[0]
-		for (var k in o)
-			this.self.style[k]=o[k]
+	var o = this.self, a=arguments
+	if(a.length==1){
+		var c = arguments[0]
+		for (var k in c){
+			if(k.charAt(0)=='-')
+				k=this.csn(o.style,k.substr(1))
+			o.style[k]=c[k]
+			}
 		}
 	else
-		for(var i=0;i<arguments.length;i+=2)
-			this.self.style[arguments[i]]=arguments[i+1]
-	return this.self
+		for(var i=0;i<a.length;i+=2){
+			if(a[i].charAt(0)=='-')
+				a[i]=this.csn(o.style,a[i].substr(1))
+			o.style[a[i]]=a[i+1]
+			}
+	return o
 	},
+csn:function(s,k,r){
+	if( k in s)
+		return k
+	else{
+		var kk = k.substr(0,1).toUpperCase()+k.substr(1)
+		if(this.csnp[0]+kk in s)
+			return this.csnp[0]+kk
+		else{
+			for(var i=1;i<this.csnp.length;i++){
+				if(this.csnp[i]+kk in s){
+					this.csnp[0] = this.csnp[i]
+					return this.csnp[i]+kk
+					}
+				}
+			}
+		}
+	return r?null:k
+	},
+csnp:[
+	'',
+	'webkit',
+	'ms',
+	'moz'
+	],
 /*
  *绑定事件
  *@param 事件名(无on) , callback(第一个参数是event)
@@ -63,7 +94,7 @@ add:function(){
 			continue
 		else if(typeof a[i] =='object'){
 			if(a[i].constructor==Array){
-				o._.add.apply(o._,a[i])
+				this.add.apply(this,a[i])
 				}
 			else
 				o.appendChild(a[i])
@@ -91,7 +122,7 @@ call:function(){
 			continue
 		else if(typeof a == 'object'){
 			if(a.constructor==Array)
-				this.add.apply(this.self._,a)
+				this.add.apply(this,a)
 			else if(a.nodeType)
 				this.self.appendChild(a)
 			else

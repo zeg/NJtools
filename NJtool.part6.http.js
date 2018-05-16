@@ -220,7 +220,7 @@ $.doRequest = doRequest
 $.doPost = doPost
 
 })(
-	$ //NJtools的主函数$  自行修改
+	_$ //NJtools的主函数$  自行修改
 	);
 
 /**
